@@ -1,4 +1,4 @@
-# Boats App - Spring & React
+# Boats App - Spring & Vue
 
 ## Installation 
 
