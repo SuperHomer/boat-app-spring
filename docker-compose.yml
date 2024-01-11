@@ -1,0 +1,35 @@
+version: '3'
+services:
+  spring:
+    image: boatsapp:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - spring-mysql
+      - spring-frontend
+  db:
+    image: mysql/mysql-server:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: boats_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    networks:
+      - spring-mysql
+  frontend:
+    build: ./frontend
+    ports:
+      - 5173:5173
+    networks:
+      - spring-frontend
+    depends_on:
+      - spring
+networks:
+  spring-mysql:
+    driver: bridge
+  spring-frontend:
+    driver: bridge
